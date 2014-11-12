@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="aplicacao">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <dependent-module archiveName="jcompany_service-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_service/jcompany_service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcompany_commons-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_commons/jcompany_commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcompany_integration-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_integration/jcompany_integration">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcompany_metadata-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_metadata/jcompany_metadata">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcompany_controller-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_controller/jcompany_controller">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="cee-associado_model-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cee-associado_model/cee-associado_model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="cee-associado_commons-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cee-associado_commons/cee-associado_commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jcompany_model-6.1.5.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jcompany_model/jcompany_model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="target/classes"/>
+        <property name="context-root" value="jcompany_fcls"/>
+    </wb-module>
+</project-modules>
