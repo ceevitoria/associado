@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:plct="http://www.powerlogic.com.br/plct" 
 	xmlns:c="http://java.sun.com/jstl/core">
 	<head>
     <link rel="StyleSheet" href="#{request.contextPath}/res-plc/css/jquery/ui/themes/ui.all.css" type="text/css" charset="UTF-8" />
@@ -27,7 +28,8 @@ e explicações sobre como se obter ajuda para a aplicação. Esta pagina é um 
 		div.home-subtopico-esq{width: 20px;vertical-align:middle;float:left;text-align:right;}
 		div.home-subtopico-dir{margin-left:25px;padding-left:5px;border-left: 2px solid rgb(153, 153, 153);min-width:400px;}
 		div.home-subtitulo-rodape{margin:200px 0 10px 20px;}
-		div.home-browser-esq{float:left;margin-left:25px;width:300px;padding:2px;}
+		div.home-browser-esq{float:left;margin-left:50px;width:150px;padding:2px;}
+		div.home-browser-center{float:left;margin-left:25px;width:150px;padding:2px;}
 		div.home-browser-dir{float:left;padding:2px;}
 		div.home-subtitulo-rodape{margin:200px 0 10px 20px;}
 		*+html div.home-subtitulo-rodape{margin:100px 0 10px 20px !important;} /*variação para IE 7 somente*/
@@ -40,14 +42,14 @@ e explicações sobre como se obter ajuda para a aplicação. Esta pagina é um 
 	<div class="home-coluna-esq">
 		<div class="home-titulo">Operações Frequentes</div>
 		<div class="home-botao"> 
-			<a href="#{request.contextPath}/f/inicial.xhtml" class="ui-state-default ui-corner-all plc-botao-quiosque">
+			<a href="../cee-admin" class="ui-state-default ui-corner-all plc-botao-quiosque">
 			<div><img class="ui-state-default plc-imagem" style="border: none;" src="#{request.contextPath}/res/midia/home-quiosque-home.png"/></div><div>Home</div></a>
 			<a href="#" onclick="document.getElementById('plc-acao-desconecta').click();" class="ui-state-default ui-corner-all plc-botao-quiosque">
-			<div><img class="ui-state-default plc-imagem" style="border: none;" src="#{request.contextPath}/res/midia/home-quiosque-fim.png"></img></div><div>Sair</div></a> 
+			<div><img class="ui-state-default plc-imagem" style="border: none;" src="#{request.contextPath}/res/midia/home-quiosque-logout.png"></img></div><div>Sair</div></a> 
 		</div>
 	</div>
 	<div class="home-coluna-dir">
-		<div class="home-titulo">Demonstração jCompany</div>
+		<div class="home-titulo">Sistema de Controle dos Associados da CEE</div>
 		<div class="home-subtitulo">Esta aplicação reúne uma série de conceitos e padrões de implementação Java EE 6 inovadores. Para seu melhor entendimento, sugerimos que seja seguido o roteiro abaixo: 
 		</div>
 		<div class="home-subtopico">
@@ -104,7 +106,7 @@ e explicações sobre como se obter ajuda para a aplicação. Esta pagina é um 
 					alt="Clique aqui para baixar este Navegador"
 					src="#{request.contextPath}/res/midia/home-firefox.png" />
 				</a>
-				<br/>Mozilla Firefox 2 ou superior
+				<br/>Mozilla Firefox 3 ou superior
 			</div>
 		</div>
 	</div>

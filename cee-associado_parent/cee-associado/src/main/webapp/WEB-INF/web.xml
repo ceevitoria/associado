@@ -250,7 +250,7 @@
   </web-resource-collection>
   <auth-constraint>
    <role-name>Membros</role-name>
-   <role-name>Demo</role-name>
+   <role-name>Gestor</role-name>
    <role-name>Administrador</role-name>
   </auth-constraint>
  </security-constraint>
@@ -294,18 +294,11 @@
   </form-login-config>
  </login-config>
  <security-role>
-  <role-name>Suporte</role-name>
- </security-role>
- <security-role>
-  <description>Area de RH</description>
-  <role-name>RH</role-name>
- </security-role>
- <security-role>
   <role-name>Administrador</role-name>
  </security-role>
  <security-role>
-  <description>Usuários para demonstração</description>
-  <role-name>Demo</role-name>
+  <description>Usuários gestor</description>
+  <role-name>Gestor</role-name>
  </security-role>
  <security-role>
   <description>Todos os usuários com Login</description>
@@ -324,8 +317,8 @@
  <resource-ref>
   <description>Endereço JNDI para pegar o Pool de Conexões com o SGBD. Este
 			pool deve ser configurado no Application Server e registrado
-			com o endereço acima: jdbc/cee-associado</description>
-  <res-ref-name>jdbc/cee-associado</res-ref-name>
+			com o endereço acima: jdbc/cee-apps</description>
+  <res-ref-name>jdbc/cee-apps</res-ref-name>
   <res-type>javax.sql.DataSource</res-type>
   <res-auth>Container</res-auth>
   <res-sharing-scope>Shareable</res-sharing-scope>

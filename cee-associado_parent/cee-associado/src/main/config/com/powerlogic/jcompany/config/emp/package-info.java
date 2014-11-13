@@ -2,11 +2,11 @@
  ********************** Configurações default para toda a empresa *************************
  *******************************************************************************************/
 			
-@PlcConfigCompany(name = "Powerlogic SA", domain = "www.powerlogic.com.br", acronym = "PLC", 
-			logo = "/recursos/midia/login-logo-empresa.png", address = "Av. Barão Homem de Melo, 4.554 / 2Âº andar. CEP:30.494-270, Estoril - Belo Horizonte/MG",
-			supportEmail = "suporte@powerlogic.com.br",supportPhone = "55 31 3555-0050")
+@PlcConfigCompany(name = "Comunidade Espírita Esperança", domain = "http://www.cee-es.org.br/", acronym = "CEE", 
+			logo = "/recursos/midia/login-logo-empresa.png", address = "Rua Alvim Soares Bermudes, 197, Morada de Camburi, Vitória - ES",
+			supportEmail = "joaovic@gmail.com",supportPhone = "27 8118-8483")
 			
-@PlcConfigLookAndFeel(skin = "itunes", layout = "sistema")
+@PlcConfigLookAndFeel(skin = "pergaminho", layout = "sistema")
 			    	 
 package com.powerlogic.jcompany.config.emp;
 
