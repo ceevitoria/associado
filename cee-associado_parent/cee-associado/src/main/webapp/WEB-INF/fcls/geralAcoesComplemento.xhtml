@@ -12,6 +12,16 @@
 			<div id='plc-corpo-acao-personalisado' class='plc-corpo-acao-generico'>
 				<!--PONTO_INSERCAO-->
 			
+			<ui:insert name="associado_acao_abrir">	 
+				<plcf:botaoAcao id="botaoAcaoAbrirCustomizado" urlIcone="ico iAbrir" acao="" 
+					limpaForm="false"   
+					label="jcompany.evt.abrir" botaoArrayID="ABRIR" 
+					immediate="false" validaForm="true" 
+					rendered="#{requestScope.exibeBtnAbrirCustomizado=='S'}" 
+					partialSubmit="#{!partialSubmit}" blocking="true" 
+					onclick="submeteUrl('#{request.contextPath}/f/n/#{requestScope.urlBtnAbrirCustomizado}');return false;">
+				</plcf:botaoAcao>
+			</ui:insert>
 			
 			</div>			 
 		</ui:composition>

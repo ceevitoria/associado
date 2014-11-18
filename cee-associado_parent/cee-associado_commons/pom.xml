@@ -10,8 +10,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-
-
 	<!-- definição do parent do projeto -->
 	<parent>
 		<groupId>powerlogic.jaguar.app</groupId>
@@ -31,7 +29,7 @@
 			<groupId>powerlogic.jaguar.jcompany</groupId>
 			<artifactId>jcompany_commons</artifactId>
 		</dependency>
-		
+
 		<!-- Para auditoria rígida descomentar código abaixo -->
 		<!--  Extension de auditoria -->
 		<!-- 

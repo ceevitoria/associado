@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:plct="http://www.powerlogic.com.br/plct" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['ocorrenciaMB.titulo.detalhe']}</legend>  
+			<plcf:iteracao var="ocorrencia" id="ocorrencia" value="#{associadoOcorrencia.ocorrencia}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{ocorrencia.indExcPlc}" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor')}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.tipoOcorrencia']}"/>
+					</f:facet>  
+					<plcf:comboEstatico id="tipo1" value="#{ocorrencia.tipo}" dominio="TipoOcorrencia" exibeBranco="S" ajudaChave="ajuda.tipo" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:comboEstatico id="tipo2" value="#{ocorrencia.tipo}" dominio="TipoOcorrencia" exibeBranco="S" ajudaChave="ajuda.tipo" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.dataOcorrencia']}"/>
+					</f:facet>  
+					<plcf:data id="data1" value="#{ocorrencia.data}" ajudaChave="ajuda.data" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:data id="data2" value="#{ocorrencia.data}" ajudaChave="ajuda.data" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.valorOcorrencia']}"/>
+					</f:facet>  
+					<plcf:numerico id="valor1" value="#{ocorrencia.valor}" ajudaChave="ajuda.valor" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:numerico id="valor2" value="#{ocorrencia.valor}" ajudaChave="ajuda.valor" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.descricaoOcorrencia']}"/>
+					</f:facet>  
+					<plcf:texto id="descricao" value="#{ocorrencia.descricao}" ajudaChave="ajuda.descricao" tamanho="50" tamanhoMaximo="200"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

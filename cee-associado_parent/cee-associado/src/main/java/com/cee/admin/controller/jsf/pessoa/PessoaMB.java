@@ -1,10 +1,10 @@
-package com.cee.associado.controller.jsf.associado;
+package com.cee.admin.controller.jsf.pessoa;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 
-import com.cee.associado.entity.AssociadoEntity;
+import com.cee.associado.entity.PessoaEntity;
 import com.cee.associado.controller.jsf.AppMB;
 
 import com.powerlogic.jcompany.commons.annotation.PlcUriIoC;
@@ -16,48 +16,47 @@ import com.powerlogic.jcompany.config.collaboration.PlcConfigFormLayout;
 import com.powerlogic.jcompany.config.collaboration.PlcConfigForm;
 import com.powerlogic.jcompany.config.collaboration.PlcConfigForm.ExclusionMode;
 
-
-
+//import com.powerlogic.jcompany.config.collaboration.PlcConfigNestedCombo; 
  
 import com.powerlogic.jcompany.config.aggregation.PlcConfigAggregation;
 
 @PlcConfigAggregation(
-	entity = com.cee.associado.entity.AssociadoEntity.class,
-	
-	details = {	
-		@com.powerlogic.jcompany.config.aggregation.PlcConfigDetail(
-			clazz = com.cee.associado.entity.OcorrenciaEntity.class,
-			collectionName = "ocorrencia", numNew = 4,onDemand = false,
-			navigation = @com.powerlogic.jcompany.config.aggregation.PlcConfigPagedDetail(numberByPage=30)) }
-)
+		entity = com.cee.associado.entity.PessoaEntity.class
+		,components = {@com.powerlogic.jcompany.config.aggregation.PlcConfigComponent(
+				clazz=com.cee.associado.entity.Endereco.class, property="endereco", separate=true)}
+	)
 	
 @PlcConfigForm (
+//	nestedCombo=@PlcConfigNestedCombo(origemProp="endereco.uf", destinyProp="endereco.cidade"),
 	formPattern=FormPattern.Man,
-	formLayout = @PlcConfigFormLayout(dirBase="/WEB-INF/fcls/associado")
+	formLayout = @PlcConfigFormLayout(dirBase="/WEB-INF/fcls/pessoa")
+	,exclusionMode=ExclusionMode.LOGICAL
 )
+
 
 /**
  * Classe de Controle gerada pelo assistente
  */
  
 @SPlcMB
-@PlcUriIoC("associado")
+@PlcUriIoC("pessoa")
 @PlcHandleException
-public class AssociadoMB extends AppMB  {
+public class PessoaMB extends AppMB  {
 
 	private static final long serialVersionUID = 1L;
+	
+	
      		
 	/**
 	* Entidade da ação injetado pela CDI
 	*/
-	@Produces  @Named("associado")
-	public AssociadoEntity createEntityPlc() {
+	@Produces  @Named("pessoa")
+	public PessoaEntity createEntityPlc() {
         if (this.entityPlc==null) {
-              this.entityPlc = new AssociadoEntity();
+              this.entityPlc = new PessoaEntity();
               this.newEntity();
         }
-        
-        return (AssociadoEntity)this.entityPlc;     	
+        return (PessoaEntity)this.entityPlc;     	
 	}
 		
 }

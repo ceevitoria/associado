@@ -33,6 +33,7 @@
 
 	<!-- �?rea de dependências globais -->
 	<dependencies>
+
 		<dependency>
 			<groupId>powerlogic.jaguar.jcompany</groupId>
 			<artifactId>jcompany_view</artifactId>

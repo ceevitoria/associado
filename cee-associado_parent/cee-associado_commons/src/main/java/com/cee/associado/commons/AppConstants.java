@@ -10,6 +10,9 @@ import com.powerlogic.jcompany.commons.PlcConstants;
  */
 public interface AppConstants extends PlcConstants {
     
-    String NOME_CONSTANTE = "valorConstante";	
-    	
+    interface ACAO {
+    	String EXIBE_BT_ABRIR_CUSTOMIZADO = "exibeBtnAbrirCustomizado";
+    }
+
+    String URL_BT_ABRIR_CUSTOMIZADO = "urlBtnAbrirCustomizado";
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="pessoaman.titulo"> 
+			<plcf:linha> 
+				<plcf:celula rendered="false"> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{pessoa.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula columnSpan="2"> 
+					<plcf:titulo value="#{msg['label.nome']}"/>  
+					<plcf:texto id="nome" value="#{pessoa.nome}" ajudaChave="ajuda.nome" tamanho="90"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.cpf']}"/>  
+					<plcf:texto id="cpf" value="#{pessoa.cpf}" riaUsa="textmask(mask='999.999.999-99')" tamanho="18" ajudaChave="ajuda.cpf"/> 
+				</plcf:celula> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.sexo']}"/>  
+					<plcf:radio id="sexo" value="#{pessoa.sexo}" dominio="Sexo" layout="horizontal" inlineStyle="width:180px;" ajudaChave="ajuda.sexo"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.dataNascimento']}"/>  
+					<plcf:data id="dataNascimento" value="#{pessoa.dataNascimento}" tamanho="13" ajudaChave="ajuda.dataNascimento"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.email']}"/>  
+					<plcf:texto id="email" value="#{pessoa.email}" ajudaChave="ajuda.email" tamanho="50"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.telefone']}"/>  
+					<plcf:texto id="telefone" value="#{pessoa.telefone}" tamanho="18" riaUsa="textmask(mask='99-9999-9999')" ajudaChave="ajuda.telefone"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.celular']}"/>  
+					<plcf:texto id="celular" value="#{pessoa.celular}" tamanho="19" riaUsa="textmask(mask='99-99999-9999')" ajudaChave="ajuda.celular"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

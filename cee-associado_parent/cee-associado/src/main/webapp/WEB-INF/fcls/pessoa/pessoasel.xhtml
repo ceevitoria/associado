@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml"> 
+		<ui:define name="plc-corpo-formulario"> 
+			<div id="plc-form-basico"> 
+				<div id="#{plcAliasPrefixoAction}Arg" class="plc-form-basico-topo"> 
+					<plcf:tabela tituloChave="pessoaarg.titulo"> 
+						<plcf:linha> 
+							<plcf:celula rendered="false"> 
+								<plcf:titulo value="#{msg['label.id']}"/>  
+								<plcf:numerico id="id" value="#{pessoa.id}" ajudaChave="ajuda.id" tamanho="5"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.nome']}"/>  
+								<plcf:texto id="nome" value="#{pessoa.nome}" ajudaChave="ajuda.nome" tamanho="30"/> 
+							</plcf:celula>  
+							<plcf:celula rendered="false"> 
+								<plcf:titulo value="#{msg['label.cpf']}"/>  
+								<plcf:texto id="cpf" value="#{pessoa.cpf}" ajudaChave="ajuda.cpf"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.logradouro']}"/>  
+								<plcf:texto id="endereco_logradouro" value="#{pessoa.endereco.logradouro}" ajudaChave="ajuda.endereco.logradouro" tamanho="30"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.bairro']}"/>  
+								<plcf:texto id="endereco_bairro" value="#{pessoa.endereco.bairro}" ajudaChave="ajuda.endereco.bairro" tamanho="20"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.uf']}"/>  
+								<plcf:comboDinamico id="endereco_uf" value="#{pessoa.endereco.uf}" dominio="UfEntity" exibeBranco="S" ajudaChave="ajuda.endereco.uf"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.cidade']}"/>  
+								<plcf:comboDinamico id="endereco_cidade" value="#{pessoa.endereco.cidade}" dominio="CidadeEntity" exibeBranco="S" ajudaChave="ajuda.endereco.cidade"/> 
+							</plcf:celula> 
+						</plcf:linha> 
+					</plcf:tabela> 
+				</div>
+				<div id="#{plcAliasPrefixoAction}Sel" class="plc-form-basico-sel"> 
+					<script type="text/javascript">//<![CDATA[
+	jQuery(function(){plc.criaSelecaoJqGrid('plc-grid','plc-grid-navegador',{
+		evento:'${param.evento}',
+			modoJanelaPlc:'${param.modoJanelaPlc}',
+			rowNum:'20',
+			nomeLogica:'pessoa',
+			propAgregada:'pessoa',
+			jqGrid:{caption:
+				'#{msg['pessoa.titulo']}',
+				colNames: [
+					//'#{msg['label.id']}',
+					'#{msg['label.nome']}',
+					//'#{msg['label.cpf']}',
+					'#{msg['label.endereco.logradouro']}',
+					'#{msg['label.endereco.bairro']}',
+					'#{msg['label.endereco.uf']}',
+					'#{msg['label.endereco.cidade']}'],
+				colModel:[
+					//{name:'id',index:'id'},
+					{name:'nome',index:'nome'},
+					//{name:'cpf',index:'cpf'},
+					{name:'endereco.logradouro',index:'endereco.logradouro'},
+					{name:'endereco.bairro',index:'endereco.bairro'},
+					{name:'endereco.uf',index:'endereco.uf'},
+					{name:'endereco.cidade',index:'endereco.cidade'}]},
+			urlEdicao:'#{request.contextPath}/f/n/pessoaman'});});//]]> </script>  
+					<table id="plc-grid" width="100%" class="scroll" cellpadding="0" cellspacing="0"/>  
+					<div id="plc-grid-navegador" class="scroll" style="text-align:center;"/> 
+				</div> 
+			</div> 
+		</ui:define> 
+	</ui:composition> 
+</html>
