@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 @Access(AccessType.FIELD)
 @NamedQueries({
 		@NamedQuery(name = "AssociadoEntity.queryMan", query = "from AssociadoEntity"),
+		@NamedQuery(name = "AssociadoEntity.obterAssociadoPorIdPessoa", query = "from AssociadoEntity where pessoa.id = :idPessoa"),
 		@NamedQuery(name = "AssociadoEntity.querySel", query = "select obj.id as id, obj1.id as pessoa_id , obj1.nome as pessoa_nome, obj.data as data, obj.valor as valor, obj.status as status, obj.tipo as tipo from AssociadoEntity obj left outer join obj.pessoa as obj1 order by obj.valor asc"),
 		@NamedQuery(name = "AssociadoEntity.querySelLookup", query = "select id as id, pessoa as pessoa from AssociadoEntity where id = ? order by id asc") })
 public class AssociadoEntity extends Associado {

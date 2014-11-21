@@ -1,4 +1,4 @@
-package com.cee.admin.controller.jsf.ocorrencia;
+package com.cee.associado.controller.jsf.ocorrencia;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;

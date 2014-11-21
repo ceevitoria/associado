@@ -23,6 +23,29 @@
 				</plcf:botaoAcao>
 			</ui:insert>
 			
+			<ui:insert name="associado_acao_registrarContribuicao">	 	           
+				<plcf:botaoAcao id="botaoAcaoRegistrarContribuicao" urlIcone="ico iGravar" acao="registrarContribuicao" 
+					partialSubmit="#{!partialSubmit}" alertaExcluirDetalhe="jcompany.alerta.excluir.detalhe" 
+					label="cee.evt.registrar" limpaForm="true"  
+					botaoArrayID="REGISTRAR_CONTRIBUICAO" rendered="#{requestScope.exibeBtnRegistrarContribuicao=='S'}" 
+					onclick="beforeSubmit();">
+					<f:ajax event="action" execute="@form" render="@form" imediate="true" onerror="plc.manipulaErroAjax"/>
+					<f:param name="skipValidation" value="true"/>
+				</plcf:botaoAcao>	
+			</ui:insert>
+
+			<ui:insert name="associado_acao_limparContribuicaoAnterior">	 	           
+				<plcf:botaoAcao id="botaoAcaoLimparContribuicaoAnterior" urlIcone="ico iLimpar" acao="limparContribuicaoAnterior" 
+					partialSubmit="#{!partialSubmit}" 
+					label="cee.evt.limpar" limpaForm="true" validaForm="false" immediate="false" blocking="true"   
+					botaoArrayID="LIMPAR" rendered="#{requestScope.exibeBtnLimpar=='S'}" 
+					onclick="beforeSubmit();">
+					<f:ajax event="action" execute="@form" render="@form" imediate="true" onerror="plc.manipulaErroAjax"/>
+					<f:param name="skipValidation" value="true"/>
+				</plcf:botaoAcao>	
+			</ui:insert>
+
+			
 			</div>			 
 		</ui:composition>
 	</body>

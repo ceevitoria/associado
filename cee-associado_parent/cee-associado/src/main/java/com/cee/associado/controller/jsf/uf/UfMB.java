@@ -1,4 +1,4 @@
-package com.cee.admin.controller.jsf.uf;
+package com.cee.associado.controller.jsf.uf;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;

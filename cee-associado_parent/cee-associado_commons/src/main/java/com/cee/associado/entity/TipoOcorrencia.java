@@ -5,11 +5,9 @@ package com.cee.associado.entity;
  */
 public enum TipoOcorrencia {
     
-	CD("{tipoOcorrencia.CD}"),
-	CO("{tipoOcorrencia.CO}"),
-	CN("{tipoOcorrencia.CN}");
+	CO("{tipoOcorrencia.CO}"), // Contribuicao
+	CN("{tipoOcorrencia.CN}"); // Cancelamento
 
-	
     /**
      * @return Retorna o codigo.
      */

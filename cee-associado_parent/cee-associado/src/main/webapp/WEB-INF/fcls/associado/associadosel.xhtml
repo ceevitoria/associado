@@ -19,6 +19,7 @@
 			 					<plcf:vinculado id="pessoa" value="#{associado.pessoa}" 
 									propSelPop="pessoa" idExibe="N" idSomenteLeitura="Y" larg="1000"
 									autoRecuperacaoClasse="com.cee.associado.entity.PessoaEntity" tamanho="50" 
+									autoComplete="true" evento="y" lookupTamanho="50"
 									riaUsa="autocomplete(url='/cee-associado/soa/service/autocomplete.pessoa?q=nome', tamanhoMinimo='2', tamanhoLista='5')"
 									actionSel="pessoasel" modal="S" ajudaChave="ajuda.pessoa"
 									onkeydown="selecionaPorTecla(event,this);"/> 

@@ -4,11 +4,18 @@
   ************              preferencialmente na camada Bridge               ****************
   *******************************************************************************************/
 
-
 @PlcConfigApplication(
 	definition=@PlcConfigApplicationDefinition(name="Controle dos Associados",acronym="Associados",version=1,release=0),
-	classesDiscreteDomain={com.cee.associado.entity.TipoOcorrencia.class,com.cee.associado.entity.StatusAssociado.class,com.cee.associado.entity.TipoContribuicao.class},
-	classesLookup={com.cee.associado.entity.UfEntity.class,com.cee.associado.entity.CidadeEntity.class}
+	classesDiscreteDomain={
+		com.powerlogic.jcompany.domain.type.PlcYesNo.class,
+		com.cee.associado.entity.Sexo.class,
+		com.cee.associado.entity.TipoOcorrencia.class,
+		com.cee.associado.entity.StatusAssociado.class,
+		com.cee.associado.entity.TipoContribuicao.class,
+		com.cee.associado.entity.config.TipoMensagemSucessoConfig.class},
+	classesLookup={
+		com.cee.associado.entity.UfEntity.class,
+		com.cee.associado.entity.CidadeEntity.class}
 )
 
 package com.powerlogic.jcompany.config.app;

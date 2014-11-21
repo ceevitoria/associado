@@ -5,7 +5,7 @@
 			<li>
 				<a>
 					<span class="ico iLeiautepadrao"/>
-					<label jsfc="plcf:titulo" tituloChave="app.m.inicial">Principal</label>
+					<label jsfc="plcf:titulo" tituloChave="app.m.cadastro">Cadastro</label>
 				</a>
 				<ul class="ui-state-hover">
 					<li>
@@ -20,6 +20,36 @@
 					</li>
 				</ul>
 			</li>
+			
+			<li>
+				<a>
+					<span class="ico iGerarEsquema"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.contribuicao">Contribuição</label>
+				</a>
+				<ul class="ui-state-hover">
+					<li>
+						<a href="#{request.contextPath}/f/n/registrarcontribuicao">
+							<label jsfc="plcf:titulo" tituloChave="menu.registrarcontribuicao.titulo">Registrar Contribuição</label>
+						</a>
+					</li>
+				</ul>
+			</li>
+			
+			<!--li style="#{plct:execOneArg(request,'isUserInRole','Gestor')?'':'display:none;'}"-->
+			<li>
+				<a>
+					<span class="ico iGerarEsquema"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.configuracao">Configuracao</label>
+				</a>
+				<ul class="ui-state-hover">
+					<li>
+						<a href="#{request.contextPath}/f/n/contribuicaoconfig">
+							<label jsfc="plcf:titulo" tituloChave="menu.compravendaconfig.titulo">Contribuição</label>
+						</a>
+					</li>
+				</ul>
+			</li>
+			
 			<ui:include src="/WEB-INF/fcls-plc/geralMenuAjuda.xhtml"/>
 			<ui:include src="/WEB-INF/fcls-plc/geralMenuPrefLang.xhtml"/>
 			<ui:include src="/WEB-INF/fcls-plc/geralMenuAreaTecnica.xhtml"/>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.prime.com.tr/ui" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml"> 
+		<ui:define name="plc-corpo-formulario"> 
+<script type="text/javascript" language="javascript">
+
+//<![CDATA[
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function is_empty(obj) {
+
+    // null and undefined are empty
+    if (obj == null) return true;
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length && obj.length > 0)    return false;
+    if (obj.length === 0)  return true;
+
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key))    return false;
+    }
+
+    return true;
+}
+
+// Deprecated -- o calculo agora acontece no MB (registrocontribuicaoMB)
+function calculaTotal(indice) {
+
+	if (indice != null) {
+		var i = indice - 1
+		var vl = document.getElementById('corpo:formulario:registrocontribuicao:' + i + ':valor')
+		var vg = document.getElementById('corpo:formulario:valorTotalGeral')
+		
+		if (!is_empty(qt.value) && !is_empty(vl.value)) {
+
+			var nvl = parseFloat(vl.value.replace(',', '.'))
+
+			// Calculo do Valor Total Geral
+			if (is_empty(vg.value)) {
+				vg.value = vl.value
+			} else {
+				var nvg = parseFloat(vg.value.replace(',', '.'))
+				nvg = nvl + nvg
+				vg.value = String(nvg.toFixed(2)).replace('.', ',')
+			}
+
+		} else {
+			vl.value = '0,00'	 
+		}
+	}
+}
+
+function formataVlUnitario(indice) {
+
+	if (indice != null) {
+		var i = indice - 1
+		var vl = document.getElementById('corpo:formulario:registrocontribuicao:' + i + ':valor')
+		
+		if (!is_empty(vl.value)) {
+			var nvl = parseFloat(vl.value.replace(',', '.'))
+			vl.value = String(nvl.toFixed(2)).replace('.', ',')	 
+		}	
+	}
+}
+
+//]]>
+</script>	
+			<div id="plc-corpo-formulario" class="plc-corpo-formulario plc-form-tabular"> 
+				<fieldset class="plc-fieldset"> 
+					<legend class="plc-fieldset-legend">#{msg['registrocontribuicao.titulo']}</legend>  
+					<plcf:iteracao var="registrocontribuicao" id="registrocontribuicao" value="#{contribuicaoLista.itensPlc}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+						<h:column> 
+							<h:outputText value="#{rowCounter.index}."/>
+						</h:column>  
+						<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+							<f:facet name="header">
+								<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+							</f:facet>  
+							<span class="celulaFormularioCaixaMarcacao">
+								<plcf:caixaExclusao id="indExcPlc" value="#{registrocontribuicao.indExcPlc}"/>
+							</span> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.pessoa']}"/>  
+							</f:facet>
+							<plcf:vinculado id="pessoa" value="#{registrocontribuicao.pessoa}" 
+								propSelPop="pessoa" idExibe="N" lookupTamanho="25"
+								autoComplete="true" idTamanho="15" evento="y" 
+								idSomenteLeitura="N" autoRecuperacaoClasse="com.cee.associado.entity.PessoaEntity" 
+								actionSel="pessoasel" modal="S" ajudaChave="ajuda.pessoa"  
+								onkeydown="selecionaPorTecla(event,this);" larg="1000"
+								riaUsa="autocomplete(url='/cee-associado/soa/service/autocomplete.pessoa?q=nome', tamanhoMinimo='2', tamanhoLista='5')"/>
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.dataContribuicao']}"/>  
+							</f:facet>
+							<plcf:data id="data" value="#{registrocontribuicao.data}" ajudaChave="ajuda.data"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.valorAssociado']}"/>  
+							</f:facet>  
+							<plcf:numerico id="valor" value="#{registrocontribuicao.valor}" tamanho="10" ajudaChave="ajuda.valor"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.descricao']}" />
+							</f:facet>  
+							<plcf:texto id="descricao" value="#{registrocontribuicao.descricao}" tamanho="35" tamanhoMaximo="200" ajudaChave="ajuda.descricao"/> 
+						</h:column>  
+					</plcf:iteracao> 
+					<plcf:linha halign="right"> 
+						<plcf:celula> 
+							<plcf:titulo value="#{msg['label.valorTotalGeral']}"/>  
+						</plcf:celula>  
+						<plcf:celula>
+							<plcf:titulo value="&nbsp;:&nbsp;&nbsp;"/>  
+						</plcf:celula>  
+						<plcf:celula> 
+							<plcf:numerico id="valorTotalGeral" value="#{valorTotalGeral}" tamanho="15" somenteLeitura="S" ajudaChave="ajuda.valorTotalGeral"/> 
+						</plcf:celula>  
+						<plcf:celula width="40"/>
+					</plcf:linha>
+				</fieldset> 
+			</div> 
+		</ui:define> 
+	</ui:composition> 
+</html>

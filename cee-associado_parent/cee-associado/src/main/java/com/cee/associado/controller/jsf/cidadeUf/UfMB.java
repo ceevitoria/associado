@@ -1,4 +1,4 @@
-package com.cee.admin.controller.jsf.cidadeUf;
+package com.cee.associado.controller.jsf.cidadeUf;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
