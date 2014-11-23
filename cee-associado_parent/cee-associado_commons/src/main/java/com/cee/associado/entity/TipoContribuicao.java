@@ -5,16 +5,16 @@ package com.cee.associado.entity;
  */
 public enum TipoContribuicao {
     
-	QZ("{tipoContribuicao.QZ}"),
-	ME("{tipoContribuicao.ME}"),
-	BM("{tipoContribuicao.BM}"),
-	TM("{tipoContribuicao.TM}"),
-	SM("{tipoContribuicao.SM}"),
-	AN("{tipoContribuicao.AN}"),
-	BA("{tipoContribuicao.BA}"),
-	TA("{tipoContribuicao.TA}");
+	QZ("{tipoContribuicao.QZ}"),  // Quinzenal
+	ME("{tipoContribuicao.ME}"),  // Mensal
+	BM("{tipoContribuicao.BM}"),  // Bimensal
+	TM("{tipoContribuicao.TM}"),  // Trimestral
+	SM("{tipoContribuicao.SM}"),  // Semenstral
+	AN("{tipoContribuicao.AN}"),  // Anual
+	BA("{tipoContribuicao.BA}"),  // Bianunal
+	TA("{tipoContribuicao.TA}"),  // Trienal
+	EV("{tipoContribuicao.EV}");  // Eventual
 
-	
     /**
      * @return Retorna o codigo.
      */
