@@ -4,7 +4,7 @@ Sistema de controle dos associados da CEE
 Funcionalidades Principais
 --------------------------
 
-* Registrar novo associado
+* Manter associado
 * Registrar contribuição
 * Cancelar associação
 * Listar associados em atraso
