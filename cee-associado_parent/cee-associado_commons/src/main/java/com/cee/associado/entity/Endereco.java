@@ -17,7 +17,6 @@ import javax.persistence.AccessType;
 @NamedQueries({ @NamedQuery(name = "Endereco.querySelLookup", query = "select logradouro as logradouro from Endereco where id = ? order by logradouro asc") })
 public class Endereco implements Serializable {
 
-	@NotNull
 	@Size(max = 150)
 	private String logradouro;
 
