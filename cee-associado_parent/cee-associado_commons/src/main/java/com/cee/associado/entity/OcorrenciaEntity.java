@@ -16,8 +16,8 @@ import javax.persistence.Transient;
  */
 @SPlcEntity
 @Entity
-@Table(name = "OCORRENCIA")
-@SequenceGenerator(name = "SE_OCORRENCIA", sequenceName = "SE_OCORRENCIA")
+@Table(name = "OCORRENCIA_ASSOCIADO")
+@SequenceGenerator(name = "SE_OCORRENCIA_ASSOCIADO", sequenceName = "SE_OCORRENCIA_ASSOCIADO")
 @Access(AccessType.FIELD)
 @NamedQueries({ @NamedQuery(name = "OcorrenciaEntity.querySelLookup", query = "select id as id, tipo as tipo, descricao as descricao from OcorrenciaEntity where id = ? order by id asc") })
 public class OcorrenciaEntity extends Ocorrencia {

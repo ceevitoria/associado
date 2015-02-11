@@ -25,7 +25,7 @@ import javax.persistence.GeneratedValue;
 public abstract class Ocorrencia extends AppBaseEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SE_OCORRENCIA")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SE_OCORRENCIA_ASSOCIADO")
 	private Long id;
 
 	@ManyToOne(targetEntity = AssociadoEntity.class, fetch = FetchType.LAZY)
