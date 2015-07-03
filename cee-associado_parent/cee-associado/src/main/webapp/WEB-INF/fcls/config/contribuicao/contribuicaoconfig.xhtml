@@ -31,6 +31,17 @@
 						</plcf:celula> 
 					</plcf:linha> 
 				</plcf:tabela> 
+				<script type="text/javascript">//<![CDATA[
+					plc.jq("#corpo\\:formulario\\:exibirMensagemSucesso\\:_0").click(function(){
+					    plc.jq("#corpo\\:formulario\\:tipoMensagemSucesso").prop('disabled', false);
+					    plc.jq("#corpo\\:formulario\\:tipoMensagemSucesso").focus();
+					});
+					plc.jq("#corpo\\:formulario\\:exibirMensagemSucesso	\\:_1").click(function(){
+					    plc.jq("#corpo\\:formulario\\:tipoMensagemSucesso").val("");					    
+					    plc.jq("#corpo\\:formulario\\:tipoMensagemSucesso").prop('disabled', true);
+					});
+				//]]>
+				</script>		 	
 			</div> 
 		</ui:define> 
 	</ui:composition> 
