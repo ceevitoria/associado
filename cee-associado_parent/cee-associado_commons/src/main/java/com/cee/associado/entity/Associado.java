@@ -30,6 +30,8 @@ import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 @MappedSuperclass
 public abstract class Associado extends AppBaseEntity {
 
+	private static final long serialVersionUID = 1L;
+
 	@OneToMany(targetEntity = com.cee.associado.entity.OcorrenciaEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "associado")
 	@ForeignKey(name = "FK_OCORRENCIA_ASSOCIADO")
 	@PlcValDuplicity(property = "tipo")
