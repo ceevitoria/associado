@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.cee.associado.entity.Pessoa;
-import com.cee.associado.entity.PessoaEntity;
 
 @Access(AccessType.FIELD)
 public class RegistroContribuicao {

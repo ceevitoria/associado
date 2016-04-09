@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -24,18 +25,16 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ForeignKey;
 
-import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
 import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 
 @MappedSuperclass
 public abstract class Associado extends AppBaseEntity {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6264809714035679711L;
 
 	@OneToMany(targetEntity = com.cee.associado.entity.OcorrenciaEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "associado")
 	@ForeignKey(name = "FK_OCORRENCIA_ASSOCIADO")
-	@PlcValDuplicity(property = "tipo")
 	@PlcValMultiplicity(referenceProperty = "tipo", message = "{jcompany.aplicacao.mestredetalhe.multiplicidade.OcorrenciaEntity}")
+	@OrderBy(value = "data")
 	@Valid
 	private List<Ocorrencia> ocorrencia;
 

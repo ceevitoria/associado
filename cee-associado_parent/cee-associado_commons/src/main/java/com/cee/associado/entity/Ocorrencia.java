@@ -23,6 +23,7 @@ import javax.persistence.GeneratedValue;
 
 @MappedSuperclass
 public abstract class Ocorrencia extends AppBaseEntity {
+	private static final long serialVersionUID = 4265986405681849284L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SE_OCORRENCIA_ASSOCIADO")
