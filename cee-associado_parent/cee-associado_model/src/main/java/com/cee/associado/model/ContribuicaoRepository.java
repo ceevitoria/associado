@@ -123,6 +123,12 @@ public class ContribuicaoRepository {
 				obs.append(DateFormat.getInstance().format(cl.getData()));
 				obs.append("' - Valor: '");
 				obs.append(String.format("R$ %,.02f", cl.getValor()));
+				obs.append("' - De: '");
+				obs.append(DateFormat.getInstance().format(cl.getPagoDe()));
+				obs.append("' - Até: '");
+				obs.append(DateFormat.getInstance().format(cl.getPagoDe()));
+				obs.append("' - Forma Pagto: '");
+				obs.append(cl.getFormaPagto().getNome());
 				obs.append("'");
 
 				listaObs.add(obs.toString());
@@ -168,7 +174,6 @@ public class ContribuicaoRepository {
 					associado = (Associado)assocList.get(0);
 				}
 				
-				
 				// Utiliza a data atual caso não tenha sido informada
 				rc.setData(rc.getData() != null ? rc.getData() : dataContribuicao);
 				
@@ -178,6 +183,9 @@ public class ContribuicaoRepository {
 				ocorrencia.setTipo(TipoOcorrencia.CO);
 				ocorrencia.setData(rc.getData());
 				ocorrencia.setValor(rc.getValor());
+				ocorrencia.setPagoDe(rc.getPagoDe());
+				ocorrencia.setPagoAte(rc.getPagoAte());
+				ocorrencia.setFormaPagto(rc.getFormaPagto());
 				ocorrencia.setDescricao(rc.getDescricao());
 				
 				ocorrencia.setDataUltAlteracao(dataContribuicao);

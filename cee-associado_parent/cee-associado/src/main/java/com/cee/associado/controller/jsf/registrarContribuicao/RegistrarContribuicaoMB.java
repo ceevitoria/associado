@@ -137,6 +137,9 @@ public class RegistrarContribuicaoMB extends AppMB  {
 			rc.setPessoa(null);
 			rc.setData(null);
 			rc.setValor(null);
+			rc.setPagoDe(null);
+			rc.setPagoAte(null);
+			rc.setFormaPagto(null);
 			rc.setDescricao(null);
 			rc.setIndExcPlc(null);
 		}
@@ -158,6 +161,9 @@ public class RegistrarContribuicaoMB extends AppMB  {
 				rc.setId(null);
 				rc.setData(null);
 				rc.setValor(null);
+				rc.setPagoDe(null);
+				rc.setPagoAte(null);
+				rc.setFormaPagto(null);
 				rc.setDescricao(null);
 				rc.setIndExcPlc(null);
 			}

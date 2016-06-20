@@ -2,24 +2,28 @@ package com.cee.associado.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import org.apache.myfaces.extensions.validator.crossval.annotation.RequiredIfType;
-import javax.persistence.Enumerated;
-import javax.persistence.TemporalType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.GenerationType;
-import org.hibernate.annotations.ForeignKey;
-import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 import javax.persistence.EnumType;
-import org.apache.myfaces.extensions.validator.crossval.annotation.RequiredIf;
-import javax.persistence.Temporal;
-import javax.validation.constraints.Size;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.validation.constraints.Digits;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.myfaces.extensions.validator.crossval.annotation.RequiredIf;
+import org.apache.myfaces.extensions.validator.crossval.annotation.RequiredIfType;
+import org.hibernate.annotations.ForeignKey;
+
+import com.powerlogic.jcompany.config.domain.PlcReference;
+import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 
 @MappedSuperclass
 public abstract class Ocorrencia extends AppBaseEntity {
@@ -47,8 +51,26 @@ public abstract class Ocorrencia extends AppBaseEntity {
 
 	@Digits(integer = 8, fraction = 2)
 	private BigDecimal valor;
+	
+	@NotNull(groups = PlcValGroupEntityList.class)
+	@RequiredIf(valueOf = "tipo", is = RequiredIfType.not_empty)
+	@Temporal(TemporalType.DATE)
+	private Date pagoDe;
+	
+	@NotNull(groups = PlcValGroupEntityList.class)
+	@RequiredIf(valueOf = "tipo", is = RequiredIfType.not_empty)
+	@Temporal(TemporalType.DATE)
+	private Date pagoAte;
 
+	@ManyToOne(targetEntity = FormaPagto.class, fetch = FetchType.LAZY)
+	@ForeignKey(name = "FK_ASSOCIADO_FORMAPAGTO")
+	@NotNull(groups = PlcValGroupEntityList.class)
+	@RequiredIf(valueOf = "id", is = RequiredIfType.not_empty)
+	@PlcReference(testDuplicity = true)
+	private FormaPagto formaPagto;
+	
 	@Size(max = 200)
+	@Column(length=200)
 	private String descricao;
 
 	public Long getId() {
@@ -81,6 +103,30 @@ public abstract class Ocorrencia extends AppBaseEntity {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public Date getPagoDe() {
+		return pagoDe;
+	}
+
+	public void setPagoDe(Date pagoDe) {
+		this.pagoDe = pagoDe;
+	}
+
+	public Date getPagoAte() {
+		return pagoAte;
+	}
+
+	public void setPagoAte(Date pagoAte) {
+		this.pagoAte = pagoAte;
+	}
+
+	public FormaPagto getFormaPagto() {
+		return formaPagto;
+	}
+
+	public void setFormaPagto(FormaPagto formaPagto) {
+		this.formaPagto = formaPagto;
 	}
 
 	public String getDescricao() {

@@ -15,7 +15,8 @@
 		com.cee.associado.entity.config.TipoMensagemSucessoConfig.class},
 	classesLookup={
 		com.cee.associado.entity.UfEntity.class,
-		com.cee.associado.entity.CidadeEntity.class}
+		com.cee.associado.entity.CidadeEntity.class,
+		com.cee.associado.entity.FormaPagto.class}
 )
 
 package com.powerlogic.jcompany.config.app;

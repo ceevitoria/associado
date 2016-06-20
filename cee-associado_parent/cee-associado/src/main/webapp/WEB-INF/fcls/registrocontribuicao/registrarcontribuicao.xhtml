@@ -11,70 +11,6 @@
 	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
 	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml"> 
 		<ui:define name="plc-corpo-formulario"> 
-<script type="text/javascript" language="javascript">
-
-//<![CDATA[
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function is_empty(obj) {
-
-    // null and undefined are empty
-    if (obj == null) return true;
-    // Assume if it has a length property with a non-zero value
-    // that that property is correct.
-    if (obj.length && obj.length > 0)    return false;
-    if (obj.length === 0)  return true;
-
-    for (var key in obj) {
-        if (hasOwnProperty.call(obj, key))    return false;
-    }
-
-    return true;
-}
-
-// Deprecated -- o calculo agora acontece no MB (registrocontribuicaoMB)
-function calculaTotal(indice) {
-
-	if (indice != null) {
-		var i = indice - 1
-		var vl = document.getElementById('corpo:formulario:registrocontribuicao:' + i + ':valor')
-		var vg = document.getElementById('corpo:formulario:valorTotalGeral')
-		
-		if (!is_empty(qt.value) && !is_empty(vl.value)) {
-
-			var nvl = parseFloat(vl.value.replace(',', '.'))
-
-			// Calculo do Valor Total Geral
-			if (is_empty(vg.value)) {
-				vg.value = vl.value
-			} else {
-				var nvg = parseFloat(vg.value.replace(',', '.'))
-				nvg = nvl + nvg
-				vg.value = String(nvg.toFixed(2)).replace('.', ',')
-			}
-
-		} else {
-			vl.value = '0,00'	 
-		}
-	}
-}
-
-function formataVlUnitario(indice) {
-
-	if (indice != null) {
-		var i = indice - 1
-		var vl = document.getElementById('corpo:formulario:registrocontribuicao:' + i + ':valor')
-		
-		if (!is_empty(vl.value)) {
-			var nvl = parseFloat(vl.value.replace(',', '.'))
-			vl.value = String(nvl.toFixed(2)).replace('.', ',')	 
-		}	
-	}
-}
-
-//]]>
-</script>	
 			<div id="plc-corpo-formulario" class="plc-corpo-formulario plc-form-tabular"> 
 				<fieldset class="plc-fieldset"> 
 					<legend class="plc-fieldset-legend">#{msg['registrocontribuicao.titulo']}</legend>  
@@ -104,15 +40,41 @@ function formataVlUnitario(indice) {
 						</h:column>  
 						<h:column> 
 							<f:facet name="header">
-								<plcf:titulo value="#{msg['label.dataContribuicao']}"/>  
+								<plcf:titulo value="#{msg['label.data']}"/>  
 							</f:facet>
 							<plcf:data id="data" value="#{registrocontribuicao.data}" ajudaChave="ajuda.data"/> 
 						</h:column>  
+						<h:column>
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.valor']}"/>  
+							</f:facet>  
+							<h:inputText id="valor" size="6" title="#{msg['ajuda.valor']}" value="#{registrocontribuicao.valor}" class="classeValorOcorrencia" style="text-align:right;" readonly="false" required="true">
+							<f:convertNumber maxFractionDigits="2"
+							    groupingUsed="true"
+							    pattern="#0.00"
+							    currencyCode="R$"
+							    minFractionDigits="2"
+							    maxIntegerDigits="5"
+							    type="currency"/>
+							</h:inputText>							
+						</h:column>  
 						<h:column> 
 							<f:facet name="header">
-								<plcf:titulo value="#{msg['label.valorAssociado']}"/>  
+								<plcf:titulo value="#{msg['label.pagoDe']}"/>
 							</f:facet>  
-							<plcf:numerico id="valor" value="#{registrocontribuicao.valor}" tamanho="10" ajudaChave="ajuda.valor"/> 
+							<plcf:data id="pagoDe" value="#{registrocontribuicao.pagoDe}" ajudaChave="ajuda.pagoDe" /> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.pagoAte']}"/>
+							</f:facet>  
+							<plcf:data id="pagoAte" value="#{registrocontribuicao.pagoAte}" ajudaChave="ajuda.pagoAte" /> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.formaPagto']}"/>
+							</f:facet>  
+							<plcf:comboDinamico id="formaPagto" value="#{registrocontribuicao.formaPagto}" dominio="FormaPagto" exibeBranco="S" ajudaChave="ajuda.formaPagto" /> 
 						</h:column>  
 						<h:column> 
 							<f:facet name="header">
@@ -128,13 +90,64 @@ function formataVlUnitario(indice) {
 						<plcf:celula>
 							<plcf:titulo value="&nbsp;:&nbsp;&nbsp;"/>  
 						</plcf:celula>  
-						<plcf:celula> 
-							<plcf:numerico id="valorTotalGeral" value="#{valorTotalGeral}" tamanho="15" somenteLeitura="S" ajudaChave="ajuda.valorTotalGeral"/> 
+						<plcf:celula>
+							<h:inputText id="valorTotalGeral" size="13" value="#{valorTotalGeral}" style="text-align:right;color:blue;font-weight: bold;" readonly="true" required="false">
+							<f:convertNumber maxFractionDigits="2"
+							    groupingUsed="true"
+							    pattern="#0.00"
+							    currencySymbol="R$"
+							    minFractionDigits="2"
+							    maxIntegerDigits="5"
+							    type="currency"/>
+							</h:inputText>							
 						</plcf:celula>  
 						<plcf:celula width="40"/>
 					</plcf:linha>
 				</fieldset> 
 			</div> 
+			<script type="text/javascript">//<![CDATA[
+			
+			function calcularValorPagamentos() {
+				var sum = sumjq(".classeValorOcorrencia");
+
+				if (sum != "NaN") {
+					var sSum = sum.toString(); 
+					sSum = sSum.replace(".",",");
+
+					plc.jq("#corpo\\:formulario\\:valorTotalGeral").val("R$ " + sSum + " ");
+					
+				} else {
+					plc.jq("#corpo\\:formulario\\:valorTotalGeral").val("## ERRO ##   ");
+				}
+			}
+
+			sumjq = function(selector) {
+			    var sum = 0.0;
+			    jQuery(selector).each(function() {
+			    	sValorLiquido = jQuery(this).val();
+
+			    	if (sValorLiquido != "") {
+						sValorLiquido = sValorLiquido.replace(",",".");
+						var valorLiquido = parseFloat(sValorLiquido);
+						sum += valorLiquido; 
+				    } 
+			    	
+			    });
+			    
+			    return sum.toFixed(2);
+			}
+					
+			plc.jq(document).ready(function(){
+				plc.jq.each([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], function (index, value) {
+					plc.jq("#corpo\\:formulario\\:registrocontribuicao\\:" + index + "\\:valor").on("change", function(){
+						calcularValorPagamentos();
+					});
+				});
+
+				calcularValorPagamentos();
+			});
+
+			//]]> </script>
 		</ui:define> 
 	</ui:composition> 
 </html>

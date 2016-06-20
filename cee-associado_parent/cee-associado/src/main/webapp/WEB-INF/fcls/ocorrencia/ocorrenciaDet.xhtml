@@ -47,6 +47,27 @@
 				</h:column>  
 				<h:column> 
 					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.pagoDe']}"/>
+					</f:facet>  
+					<plcf:data id="pagoDe1" value="#{ocorrencia.pagoDe}" ajudaChave="ajuda.pagoDe" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:data id="pagoDe2" value="#{ocorrencia.pagoDe}" ajudaChave="ajuda.pagoDe" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.pagoAte']}"/>
+					</f:facet>  
+					<plcf:data id="pagoAte1" value="#{ocorrencia.pagoAte}" ajudaChave="ajuda.pagoAte" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:data id="pagoAte2" value="#{ocorrencia.pagoAte}" ajudaChave="ajuda.pagoAte" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.formaPagto']}"/>
+					</f:facet>  
+					<plcf:comboDinamico id="formaPagto1" value="#{ocorrencia.formaPagto}" dominio="FormaPagto" exibeBranco="S" ajudaChave="ajuda.formaPagto" somenteLeitura="S" rendered="#{not plct:execOneArg(request,'isUserInRole','Gestor') and ocorrencia.id != null}"/> 
+					<plcf:comboDinamico id="formaPagto2" value="#{ocorrencia.formaPagto}" dominio="FormaPagto" exibeBranco="N" ajudaChave="ajuda.formaPagto" somenteLeitura="N" rendered="#{plct:execOneArg(request,'isUserInRole','Gestor') or ocorrencia.id == null}"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
 						<plcf:titulo value="#{msg['label.descricaoOcorrencia']}"/>
 					</f:facet>  
 					<plcf:texto id="descricao" value="#{ocorrencia.descricao}" ajudaChave="ajuda.descricao" tamanho="50" tamanhoMaximo="200"/> 
