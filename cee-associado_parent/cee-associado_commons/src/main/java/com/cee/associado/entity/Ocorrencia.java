@@ -49,6 +49,8 @@ public abstract class Ocorrencia extends AppBaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 
+	@NotNull(groups = PlcValGroupEntityList.class)
+	@RequiredIf(valueOf = "tipo", is = RequiredIfType.not_empty)
 	@Digits(integer = 8, fraction = 2)
 	private BigDecimal valor;
 	
