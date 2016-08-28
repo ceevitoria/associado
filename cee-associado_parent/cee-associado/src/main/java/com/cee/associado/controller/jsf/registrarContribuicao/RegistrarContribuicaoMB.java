@@ -3,11 +3,14 @@ package com.cee.associado.controller.jsf.registrarContribuicao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.apache.commons.lang.time.DateUtils;
 
 import com.cee.associado.commons.AppConstants;
 import com.cee.associado.controller.jsf.AppMB;
@@ -62,6 +65,9 @@ public class RegistrarContribuicaoMB extends AppMB  {
 	private static final long serialVersionUID = 1L;
 
 	private BigDecimal valorTotalGeral;
+	private boolean isRegistrandoContribuicao = false;
+	private Date dataInicioRegistroContribuicao = new Date();
+	private RetornoRegistro registroRetorno = null;
 
 	@Produces @Named("valorTotalGeral")
 	public BigDecimal getValorTotalGeral() {
@@ -114,15 +120,21 @@ public class RegistrarContribuicaoMB extends AppMB  {
 		
 		contextUtil.getRequest().setAttribute(AppConstants.ACAO.EXIBE_BT_LIMPAR, PlcConstants.EXIBIR);
 		contextUtil.getRequest().setAttribute(AppConstants.ACAO.EXIBE_BT_NOVO, PlcConstants.EXIBIR);
-		contextUtil.getRequest().setAttribute(AppConstants.ACAO.EXIBE_BT_REGISTRAR_CONTRIBUICAO, PlcConstants.EXIBIR);
+		
+//		if (!isRegistrandoContribuicao) {
+			contextUtil.getRequest().setAttribute(AppConstants.ACAO.EXIBE_BT_REGISTRAR_CONTRIBUICAO, PlcConstants.EXIBIR);
+//		} else {
+//			contextUtil.getRequest().setAttribute(AppConstants.ACAO.EXIBE_BT_REGISTRAR_CONTRIBUICAO, PlcConstants.NAO_EXIBIR);
+//		}
+		
 	}
 	
 	public String limparContribuicaoAnterior()  {
 		List itens = entityListPlc.getItensPlc();
 
 		limpaItens(itens);
-		this.setValorTotalGeral(null);
-		
+		isRegistrandoContribuicao = false;
+
 		return baseEditMB.getDefaultNavigationFlow(); 
 	}
 
@@ -130,6 +142,7 @@ public class RegistrarContribuicaoMB extends AppMB  {
 	 * 
 	 */
 	private void limpaItens(List itens) {
+		this.setValorTotalGeral(null);
 
 		for (Object o : itens) {
 			RegistroContribuicao rc = (RegistroContribuicao)o;
@@ -152,60 +165,56 @@ public class RegistrarContribuicaoMB extends AppMB  {
 		}
 	}
 
-	private void limpaItensSemPessoa(List itens) {
-
-		for (Object o : itens) {
-			RegistroContribuicao rc = (RegistroContribuicao)o;
-			
-			if (rc.getPessoa() == null || rc.getPessoa().getNome() == null || "".compareTo(rc.getPessoa().getNome().trim()) == 0) {
-				rc.setId(null);
-				rc.setData(null);
-				rc.setValor(null);
-				rc.setPagoDe(null);
-				rc.setPagoAte(null);
-				rc.setFormaPagto(null);
-				rc.setDescricao(null);
-				rc.setIndExcPlc(null);
-			}
-		}
-	}
-
 	/**
 	 * 
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	public String registrarContribuicao()  {
-		PlcBaseContextVO context = contextMontaUtil.createContextParam(plcControleConversacao);
+		Date dataHoraCorrente = new Date();
+		long diffTimeInMillies = dataHoraCorrente.getTime() - dataInicioRegistroContribuicao.getTime();
 		
-		List itens = entityListPlc.getItensPlc();
-
-		RetornoRegistro ret = iocControleFacadeUtil.getFacade(IAppFacade.class).registrarContribuicao(context, itens);
-		
-		this.setValorTotalGeral(ret.getValor());
-		
-		if (ret.getAlertas().size() > 0) {
+		if (!isRegistrandoContribuicao || diffTimeInMillies > 5000) {
+			isRegistrandoContribuicao = true;
+			dataInicioRegistroContribuicao = new Date();
+			PlcBaseContextVO context = contextMontaUtil.createContextParam(plcControleConversacao);
 			
-			for (String alerta : ret.getAlertas()) {
+			List itens = entityListPlc.getItensPlc();
+			
+			registroRetorno = iocControleFacadeUtil.getFacade(IAppFacade.class).registrarContribuicao(context, itens);
+			
+			exibeResultado(itens);
+			
+		} else {
+			List itens = entityListPlc.getItensPlc();
+			exibeResultado(itens);
+		}
+
+		return baseEditMB.getDefaultNavigationFlow(); 
+	}
+
+	private void exibeResultado(List itens) {
+		this.setValorTotalGeral(registroRetorno.getValor());
+		
+		if (registroRetorno.getAlertas().size() > 0) {
+			
+			for (String alerta : registroRetorno.getAlertas()) {
 				msgUtil.msg(alerta, PlcMessage.Cor.msgAmareloPlc.name());
 			}
 		}
 		
-		if (ret.getMensagens().size() > 0) {
+		if (registroRetorno.getMensagens().size() > 0) {
 			
-			for (String mensagem : ret.getMensagens()) {
+			for (String mensagem : registroRetorno.getMensagens()) {
 				msgUtil.msg(mensagem, PlcMessage.Cor.msgAzulPlc.name());
 			}
 		}
 		
-		ContribuicaoConfig config = (ContribuicaoConfig)ret.getConfig();
+		ContribuicaoConfig config = (ContribuicaoConfig)registroRetorno.getConfig();
 		
 		if (config.getAutoLimparTelaParaNovaContribuicao().equals(PlcYesNo.S)) {
 			limpaItens(itens);
 			this.setValorTotalGeral(null);
 		}
-		
-		
-		return baseEditMB.getDefaultNavigationFlow(); 
 	}
 	
 }
