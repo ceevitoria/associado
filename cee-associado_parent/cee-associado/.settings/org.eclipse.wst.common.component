@@ -29,6 +29,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="target/classes"/>
-        <property name="context-root" value="jcompany_fcls"/>
+        <property name="context-root" value="cee-associado"/>
     </wb-module>
 </project-modules>

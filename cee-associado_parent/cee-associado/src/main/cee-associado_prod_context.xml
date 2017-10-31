@@ -23,7 +23,9 @@
 		  defaultAutoCommit="false"
 		  fairQueue="true"
 		  testOnBorrow="true"
+		  autoReconnect="true"
 		  validationQuery="select 1" />
+
 
  <!-- JCDI / Weld (RI)  -->      
  <Resource name="BeanManager"
